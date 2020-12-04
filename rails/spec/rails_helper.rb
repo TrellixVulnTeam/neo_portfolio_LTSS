@@ -84,4 +84,7 @@ RSpec.configure do |config|
   config.after(:all) do
     DatabaseCleaner.clean
   end
+
+  config.include RSpec::RequestDescriber, type: :request
+  config.include JsonSpec::Helpers
 end
