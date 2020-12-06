@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "API V1 (en)",
+    "title": "Neo Portfolio",
     "version": "v1"
   },
   "securityDefinitions": {
@@ -13,11 +13,11 @@
   },
   "basePath": "/api/v1",
   "paths": {
-    "/books": {
+    "/posts": {
       "get": {
-        "summary": "Book list",
+        "summary": "Post list",
         "tags": [
-          "Book list Group"
+          "Post list"
         ],
         "produces": [
           "application/json"
@@ -38,13 +38,29 @@
                 "status": {
                   "type": "string"
                 },
-                "message": {
-                  "type": "string"
+                "data": {
+                  "type": "array",
+                  "posts": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "title": {
+                        "type": "string",
+                        "example": "タイトル"
+                      },
+                      "description": {
+                        "type": "string",
+                        "example": "デスクリプション"
+                      }
+                    }
+                  }
                 }
               },
               "required": [
-                "status",
-                "message"
+                "status"
               ]
             }
           }
