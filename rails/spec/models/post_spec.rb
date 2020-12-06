@@ -7,10 +7,11 @@ RSpec.describe Post, type: :model do
       it { is_expected.to be_valid }
     end
 
-    context "when save invalid data" do
+    context "when save data" do
       let!(:post) { Post.new() }
-      it 'in valid title' do
+      it 'with invalid title' do
         post.valid?
+        expect(post.errors.messages[:title]).to include("can't be blank")
         expect(post.errors.messages[:title]).to include("can't be blank")
       end
     end
