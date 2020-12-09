@@ -15,7 +15,7 @@ paths:
         200:
           description: On Success
           schema:
-            $ref: '#/definitions/Posts'
+            $ref: '#/definitions/responses/Posts'
     post:
       summary: Create Post
       tags:
@@ -29,12 +29,12 @@ paths:
           in: body
           required: true
           schema:
-            $ref: "#/definitions/Post"
+            $ref: "#/definitions/parameter/Post"
       responses:
         200:
           description: On Success
           schema:
-            $ref: "#/definitions/Post"
+            $ref: "#/definitions/responses/Post"
           examples:
             application/json:
               status: SUCCESS
@@ -63,33 +63,49 @@ paths:
               error: Bad Request
               exception: param is missing or the value is empty
 definitions:
-  Posts:
-    type:  array
-    items:
-      $ref: '#/definitions/Post'
-  Post:
-    type: object
-    required:
-      - title
-      - description
-    properties:
-      id:
-        type: integer
-        format: int64
-        example: 1
-      title:
-        type: string
-        description: postのタイトル
-        example: ポートフォリオ
-      description:
-        type: string
-        description: postの本文
-        example: これはポートフォリオの本文です。
-      created_at:
-        type: string
-        description: 作成日
-        example: '2020-12-04T12:08:10.855Z'
-      updated_at:
-        type: string
-        description: 更新日
-        example: '2020-12-04T12:08:10.855Z'
+  parameter:
+    Post:
+      type: object
+      required:
+        - title
+        - description
+      properties:
+        title:
+          type: string
+          description: postのタイトル
+          example: ポートフォリオ
+        description:
+          type: string
+          description: postの本文
+          example: これはポートフォリオの本文です。
+  responses:
+    Posts:
+      type:  array
+      items:
+        $ref: '#/definitions/responses/Post'
+    Post:
+      type: object
+      required:
+        - title
+        - description
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        title:
+          type: string
+          description: postのタイトル
+          example: ポートフォリオ
+        description:
+          type: string
+          description: postの本文
+          example: これはポートフォリオの本文です。
+        created_at:
+          type: string
+          description: 作成日時
+          example: '2020-12-08T16:44:18.843Z'
+        updated_at:
+          type: string
+          description: 更新日時
+          example: '2020-12-08T16:44:18.843Z'
