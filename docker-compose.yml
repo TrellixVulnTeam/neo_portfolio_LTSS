@@ -3,14 +3,13 @@ version: '3'
 services:
   web:
     build: ./rails
-    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     ports:
       - '3000:3000'
     depends_on:
       - db
     volumes:
       - ./rails:/app
-      - bundle:/usr/local/bundle
     tty: true
     stdin_open: true
   db:
@@ -25,13 +24,26 @@ services:
     build: ./vue
     volumes:
       - ./vue:/app
-      - /vue/node_modules
+      - ./vue/node_modules
     ports:
       - '8080:8080'
     tty: true
     stdin_open: true
     command: yarn run serve
 
+  swagger-editor:
+    image: swaggerapi/swagger-editor
+    ports:
+      - '8081:8080'
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    ports:
+      - '8082:8080'
+    volumes:
+      - ./rails/swagger/swagger.yaml:/swagger.yaml
+    environment:
+      SWAGGER_JSON: /swagger.yaml
+
 volumes:
   mysql_data:
-  bundle:
+  node_modules:
