@@ -62,6 +62,25 @@ paths:
               status: 400
               error: Bad Request
               exception: param is missing or the value is empty
+  /post/{postId}:
+    get:
+      summary: Show Post
+      tags:
+        - Post
+      produces:
+        - application/json
+      parameters:
+        - name: postId
+          in: path
+          description: 参照したいpostのid
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: On Success
+          schema:
+            $ref: '#/definitions/responses/Post'
 definitions:
   parameter:
     Post:
