@@ -21,6 +21,7 @@ RSpec.describe 'Posts', type: :request do
 
     it 'returns a succes message and post' do
       is_expected.to eq 200
+      expect(Post.count).to eq 1
     end
   end
 
@@ -32,6 +33,27 @@ RSpec.describe 'Posts', type: :request do
 
       it 'returns a post' do
         is_expected.to eq 200
+      end
+    end
+
+    context 'when post_id not exist' do
+      let(:post_id) { post.id + 1 }
+
+      it 'returns ActiveRecord::RecordNotFound' do
+        is_expected.to eq 404
+      end
+    end
+  end
+
+  describe 'DELETE /api/v1/posts/:post_id' do
+    let(:post) { create(:post) }
+
+    context 'when post_id exist' do
+      let(:post_id) { post.id }
+
+      it 'returns a post' do
+        is_expected.to eq 200
+        expect(Post.count).to eq 0
       end
     end
 

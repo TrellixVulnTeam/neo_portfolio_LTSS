@@ -81,6 +81,25 @@ paths:
           description: On Success
           schema:
             $ref: '#/definitions/responses/Post'
+    delete:
+      summary: Delete Post
+      tags:
+        - Post
+      produces:
+        - application/json
+      parameters:
+        - name: postId
+          in: path
+          description: 削除したいpostのid
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: On Success
+          examples:
+            application/json:
+              status: SUCCESS
 definitions:
   parameter:
     Post:
