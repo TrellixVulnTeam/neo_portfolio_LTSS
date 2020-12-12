@@ -15,7 +15,7 @@ paths:
         200:
           description: On Success
           schema:
-            $ref: '#/definitions/responses/Posts'
+            $ref: '#/definitions/Responses/Posts'
     post:
       summary: Create Post
       tags:
@@ -29,12 +29,12 @@ paths:
           in: body
           required: true
           schema:
-            $ref: "#/definitions/parameter/Post"
+            $ref: "#/definitions/Parameter/Post"
       responses:
         200:
           description: On Success
           schema:
-            $ref: "#/definitions/responses/Post"
+            $ref: "#/definitions/Responses/Post"
           examples:
             application/json:
               status: SUCCESS
@@ -80,7 +80,7 @@ paths:
         200:
           description: On Success
           schema:
-            $ref: '#/definitions/responses/Post'
+            $ref: '#/definitions/Responses/Post'
     delete:
       summary: Delete Post
       tags:
@@ -100,8 +100,52 @@ paths:
           examples:
             application/json:
               status: SUCCESS
+    put:
+      summary: Update Post
+      tags:
+        - Post
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Parameter/Post"
+      responses:
+        200:
+          description: On Success
+          schema:
+            $ref: "#/definitions/Responses/Post"
+          examples:
+            application/json:
+              status: SUCCESS
+              data:
+                id: 1
+                title: ポートフォリオ
+                description: これはポートフォリオの本文です。
+        400:
+          description: Bad Request
+          schema:
+            type: object
+            required:
+              - status
+              - error
+              - exception
+            properties:
+              status:
+                type: integer
+              error:
+                type: string
+              exception:
+                type: string
+          examples:
+            application/json:
+              status: 400
+              error: Bad Request
+              exception: param is missing or the value is empty
 definitions:
-  parameter:
+  Parameter:
     Post:
       type: object
       required:
@@ -116,11 +160,11 @@ definitions:
           type: string
           description: postの本文
           example: これはポートフォリオの本文です。
-  responses:
+  Responses:
     Posts:
       type:  array
       items:
-        $ref: '#/definitions/responses/Post'
+        $ref: '#/definitions/Responses/Post'
     Post:
       type: object
       required:

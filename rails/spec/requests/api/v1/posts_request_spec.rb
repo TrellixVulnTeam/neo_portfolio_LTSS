@@ -65,4 +65,33 @@ RSpec.describe 'Posts', type: :request do
       end
     end
   end
+
+  describe 'PUT /api/v1/posts/:post_id' do
+    let(:post) { create(:post, title: 'テストだよ', description: 'これはテストだよ') }
+    let(:params) { build(:post, title: '更新したよ', description: 'テストを更新したよ') }
+    let(:headers) do
+      {
+        'Content-Type' => 'application/json',
+        'Accept' => 'application/json'
+      }
+    end
+
+    context 'when post_id exist' do
+      let(:post_id) { post.id }
+
+      it 'returns a updated post' do
+        is_expected.to eq 200
+        expect(post.reload.title).to eq '更新したよ'
+        expect(post.reload.description).to eq 'テストを更新したよ'
+      end
+    end
+
+    context 'when post_id not exist' do
+      let(:post_id) { post.id + 1 }
+
+      it 'returns ActiveRecord::RecordNotFound' do
+        is_expected.to eq 404
+      end
+    end
+  end
 end

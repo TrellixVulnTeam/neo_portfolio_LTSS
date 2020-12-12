@@ -1,7 +1,7 @@
 module Api
   module V1
     class PostsController < ApplicationController
-      before_action :set_post, only: [:show, :destroy]
+      before_action :set_post, only: [:show, :destroy, :update]
 
       def index
         posts = Post.all
@@ -29,6 +29,14 @@ module Api
           render json: { status: 'SUCCESS' }
         else
           render json: { status: 'ERROR', data: @post.errors }
+        end
+      end
+
+      def update
+        if @post.update(post_params)
+          render json: { status: 'SUCCESS', data: @post}
+        else
+          render json: { status: 'SUCCESS', data: @post.errors}
         end
       end
 
