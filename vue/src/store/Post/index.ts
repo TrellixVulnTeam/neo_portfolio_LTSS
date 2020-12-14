@@ -1,11 +1,11 @@
-import { Module } from 'vuex';
-import { PostsState, RootState } from '@/store/types';
-import getters from './getters';
-import actions from './actions';
-import mutations from './mutations';
+import { Module } from "vuex";
+import { PostsState, RootState } from "@/store/types";
+import getters from "./getters";
+import actions from "./actions";
+import mutations from "./mutations";
 
 const state: PostsState = {
-  posts: [],
+  posts: []
 };
 
 export const posts: Module<PostsState, RootState> = {
@@ -13,5 +13,5 @@ export const posts: Module<PostsState, RootState> = {
   state,
   getters,
   actions,
-  mutations,
+  mutations
 };

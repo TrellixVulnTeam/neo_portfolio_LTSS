@@ -12,15 +12,14 @@ import { PostsState } from "../store/types";
 const namespace = "posts";
 
 @Component({
-  components: {
-  },
+  components: {}
 })
 export default class Post extends Vue {
   @State(namespace) posts: PostsState;
   @Action("fetchPosts", { namespace }) fetchPosts: any;
 
   mounted() {
-    this.fetchPosts()
-  };
+    this.fetchPosts();
+  }
 }
 </script>

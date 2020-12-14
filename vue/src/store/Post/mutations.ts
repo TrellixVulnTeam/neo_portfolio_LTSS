@@ -1,9 +1,9 @@
-import { MutationTree } from 'vuex';
-import { PostsState, Post } from '@/store/types';
+import { MutationTree } from "vuex";
+import { PostsState, Post } from "@/store/types";
 
 const mutations: MutationTree<PostsState> = {
   fetchPosts: (state, posts: Post[]) => {
-    state.posts = posts
+    state.posts = posts;
   }
 };
 
