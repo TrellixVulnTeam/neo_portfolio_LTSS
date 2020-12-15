@@ -5,7 +5,7 @@ import axios from "axios";
 const actions: ActionTree<PostsState, RootState> = {
   fetchPosts: async ({ commit }, posts: Post[]) => {
     await axios.get(axios.defaults.baseURL + "posts").then(res => {
-      posts = res.data;
+      posts = res.data.data;
     });
     commit("fetchPosts", posts);
   }
