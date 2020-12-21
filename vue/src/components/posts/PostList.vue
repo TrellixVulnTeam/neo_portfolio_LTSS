@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mt-10">
     <v-card>
       <v-card-title class="mb-12">
         {{ id }}: {{ title }}
